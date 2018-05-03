@@ -10,6 +10,7 @@ namespace CheckoutSystem.Models
         public ShoppingBasket()
         {
             _products = new List<Product>();
+            _totalAmount = 0.0d;
         }
 
         public Int64 Id { get; set; }
@@ -20,8 +21,19 @@ namespace CheckoutSystem.Models
             get { return _products; }
             set { _products = value; }
         }
+
         public int Quantity { get; set; }
 
-        public double TotalAmount { get; set; }
+        private double _totalAmount; 
+        public double TotalAmount {
+            get
+            {
+                foreach (var item in Products)
+                {
+                    _totalAmount += item.Price.Amount ;
+                }
+                return _totalAmount;
+            }
+        }
     }
 }

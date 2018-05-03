@@ -8,7 +8,7 @@ namespace CheckoutSystem.Service
 {
     public class InMemoryProductService : IProductDataService
     {
-        public IEnumerable<Product> GetAllProducts()
+        public virtual IEnumerable<Product> GetAllProducts()
         {
             return new List<Product>
             {

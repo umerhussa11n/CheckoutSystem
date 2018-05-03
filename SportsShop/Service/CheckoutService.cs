@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace CheckoutSystem.Service
 {
-
     public class CheckoutService : ICheckoutService
     {
         private IProductDataService _productService;
@@ -32,13 +31,16 @@ namespace CheckoutSystem.Service
             }
         }
 
-        // get total price from the basket..
-        public int GetTotalPrice()
+        public double GetTotalPrice()
         {
-            throw new NotImplementedException();
+            double totalPrice = 0.0d;
+            if (_basket != null)
+            {
+                totalPrice = Basket.TotalAmount;
+            }
+            return totalPrice;
         }
 
-        // Add Item to the basket
         public void Scan(string code)
         {
             var prouct = _productService.GetAProduct(code);
@@ -46,9 +48,9 @@ namespace CheckoutSystem.Service
             {
                 _basket = new ShoppingBasket();
             }
-
             _basket.Products.Add(prouct);
-
         }
+
+
     }
 }
