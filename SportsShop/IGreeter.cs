@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace SportsShop
+namespace CheckoutSystem
 {
     public interface IGreeter
     {
