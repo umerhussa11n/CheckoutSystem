@@ -8,6 +8,8 @@ namespace CheckoutSystem.Service
 {
     public interface IProductDataService
     {
-         IEnumerable<Item> GetAllProducts();
+        IEnumerable<Product> GetAllProducts();
+
+        Product GetAProduct(string code);
     }
 }

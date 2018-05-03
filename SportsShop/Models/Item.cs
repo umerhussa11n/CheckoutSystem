@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CheckoutSystem.Models
 {
-    public class Item
+    public class Product
     {
         public Int64 Id { get; set; }
 
@@ -13,7 +13,6 @@ namespace CheckoutSystem.Models
 
         public string Description { get; set; }
 
-        //SKU
-        public string ItemCode { get; set; }
+        public string Code { get; set; }
     }
 }

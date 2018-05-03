@@ -9,16 +9,26 @@ namespace CheckoutSystem.Service
 
     public class CheckoutService : ICheckoutService
     {
+        private IProductDataService _productService;
+        public CheckoutService(IProductDataService productService)
+        {
+            _productService = productService;
+            //_basket = new ShoppingBasket();
+        }
+
         private ShoppingBasket _basket;
         public ShoppingBasket Basket
         {
             get
             {
-                return _basket == null ? new ShoppingBasket() : _basket;
+                if (this._basket == null)
+                    return new ShoppingBasket();
+                else
+                    return this._basket;
             }
             set
             {
-                value = _basket;
+                this._basket = value;
             }
         }
 
@@ -29,9 +39,16 @@ namespace CheckoutSystem.Service
         }
 
         // Add Item to the basket
-        public void Scan(string item)
+        public void Scan(string code)
         {
-            throw new NotImplementedException();
+            var prouct = _productService.GetAProduct(code);
+            if (_basket == null)
+            {
+                _basket = new ShoppingBasket();
+            }
+
+            _basket.Products.Add(prouct);
+
         }
     }
 }

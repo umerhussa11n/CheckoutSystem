@@ -10,12 +10,13 @@ namespace CheckoutSystem.Tests
         [Fact]
         public void AddItemToShoppingBasketOnScan()
         {
-            var service = new CheckoutService();
+            // need to create mock dependency for it..
+            var service = new CheckoutService(new InMemoryProductService());
             var ItemCode = "A";
 
             service.Scan(ItemCode);
 
-            Assert.Single(service.Basket.Items);
+            Assert.Single(service.Basket.Products);
         }
     }
 }

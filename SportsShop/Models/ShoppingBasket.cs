@@ -7,13 +7,18 @@ namespace CheckoutSystem.Models
 {
     public class ShoppingBasket
     {
+        public ShoppingBasket()
+        {
+            _products = new List<Product>();
+        }
+
         public Int64 Id { get; set; }
 
-        private List<Item> _items; 
-        public List<Item> Items
+        private List<Product> _products; 
+        public List<Product> Products
         {
-            get { return _items; }
-            set { _items = value; }
+            get { return _products; }
+            set { _products = value; }
         }
         public int Quantity { get; set; }
 
