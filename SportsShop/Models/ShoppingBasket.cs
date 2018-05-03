@@ -28,10 +28,6 @@ namespace CheckoutSystem.Models
         public double TotalAmount {
             get
             {
-                foreach (var item in Products)
-                {
-                    _totalAmount += item.Price.Amount ;
-                }
                 return _totalAmount;
             }
         }

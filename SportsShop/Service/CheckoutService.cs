@@ -16,6 +16,7 @@ namespace CheckoutSystem.Service
         }
 
         private ShoppingBasket _basket;
+
         public ShoppingBasket Basket
         {
             get
@@ -36,7 +37,10 @@ namespace CheckoutSystem.Service
             double totalPrice = 0.0d;
             if (_basket != null)
             {
-                totalPrice = Basket.TotalAmount;
+                foreach (var product in Basket.Products)
+                {
+                    totalPrice += product.Price.Amount;
+                }
             }
             return totalPrice;
         }

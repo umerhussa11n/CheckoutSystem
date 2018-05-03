@@ -49,7 +49,8 @@ namespace CheckoutSystem.Tests
             var code = "A";
             var product = _allMockedProducts.FirstOrDefault(x => x.Code == code);
             service.Scan(product.Code);
-            Assert.Equal(product.Price.Amount, service.Basket.TotalAmount);
+            var totalPrice = service.GetTotalPrice();
+            Assert.Equal(product.Price.Amount, totalPrice);
         }
     }
 }
