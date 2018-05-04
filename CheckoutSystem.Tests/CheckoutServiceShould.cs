@@ -13,6 +13,7 @@ namespace CheckoutSystem.Tests
     {
         List<Product> _allMockedProducts; 
         Mock<InMemoryProductService> _mockInMemoryProductService;
+        Mock<DiscountService> _discountService;
         
 
         public List<Product> GetAllProducts()
@@ -28,6 +29,7 @@ namespace CheckoutSystem.Tests
         public CheckoutServiceShould()
         {
             _mockInMemoryProductService = new Mock<InMemoryProductService>();
+            _discountService = new Mock<DiscountService>();
             _allMockedProducts = GetAllProducts();
         }
 
@@ -35,7 +37,7 @@ namespace CheckoutSystem.Tests
         public void AddItemToShoppingBasketOnScan()
         {
             _mockInMemoryProductService.Setup(x => x.GetAllProducts()).Returns(_allMockedProducts);
-            var service = new CheckoutService(_mockInMemoryProductService.Object);
+            var service = new CheckoutService(_mockInMemoryProductService.Object, _discountService.Object);
             var ItemCode = "A";
             service.Scan(ItemCode);
             Assert.Single(service.Basket.Products);
@@ -45,7 +47,7 @@ namespace CheckoutSystem.Tests
         public void ReturnTotalOfAllProductsWhenRequested()
         {
             _mockInMemoryProductService.Setup(x => x.GetAllProducts()).Returns(_allMockedProducts);
-            var service = new CheckoutService(_mockInMemoryProductService.Object);
+            var service = new CheckoutService(_mockInMemoryProductService.Object, _discountService.Object);
             var code = "A";
             var product = _allMockedProducts.FirstOrDefault(x => x.Code == code);
             service.Scan(product.Code);

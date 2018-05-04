@@ -8,6 +8,6 @@ namespace CheckoutSystem.Service
 {
     public interface IDiscountService
     {
-        void ApplyDiscount(ShoppingBasket basket, Discount discount);
+        void ApplyDiscount(Discount discount);
     }
 }

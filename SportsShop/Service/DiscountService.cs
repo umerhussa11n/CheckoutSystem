@@ -8,7 +8,23 @@ namespace CheckoutSystem.Service
 {
     public class DiscountService : IDiscountService
     {
-        public void ApplyDiscount(ShoppingBasket shoppingBasket, Discount discount)
+        private ShoppingBasket _basket;
+        public ShoppingBasket Basket
+        {
+            get
+            {
+                if (this._basket == null)
+                    return new ShoppingBasket();
+                else
+                    return this._basket;
+            }
+            set
+            {
+                this._basket = value;
+            }
+        }
+
+        public void ApplyDiscount(Discount discount)
         {
             throw new NotImplementedException();
         }

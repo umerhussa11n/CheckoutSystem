@@ -9,14 +9,15 @@ namespace CheckoutSystem.Service
     public class CheckoutService : ICheckoutService
     {
         private IProductDataService _productService;
-        public CheckoutService(IProductDataService productService)
+        private IDiscountService _discountService;
+        public CheckoutService(IProductDataService productService, IDiscountService discountService)
         {
             _productService = productService;
+            _discountService = discountService;
             //_basket = new ShoppingBasket();
         }
 
         private ShoppingBasket _basket;
-
         public ShoppingBasket Basket
         {
             get
@@ -42,6 +43,9 @@ namespace CheckoutSystem.Service
                     totalPrice += product.Price.Amount;
                 }
             }
+
+            //_discountService.ApplyDiscount(_basket, new Discount());
+
             return totalPrice;
         }
 
