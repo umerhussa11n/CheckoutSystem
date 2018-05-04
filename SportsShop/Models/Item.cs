@@ -10,6 +10,7 @@ namespace CheckoutSystem.Models
         public Product()
         {
             _price = new Price();
+            _discount = new List<Discount>();
         }
 
         public Int64 Id { get; set; }
@@ -25,6 +26,19 @@ namespace CheckoutSystem.Models
         {
             get { return _price;  }
             set { _price = value;  }
+        }
+
+        private List<Discount> _discount;
+        public List<Discount> Discount
+        {
+            get
+            {
+                return _discount;
+            }
+            set
+            {
+                _discount = value;
+            }
         }
     }
 }

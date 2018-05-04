@@ -12,11 +12,33 @@ namespace CheckoutSystem.Tests
     public class DiscountServiceShould
     {
         [Fact]
+        public void NotTryToApplyDiscountIfDiscountValueIsZero()
+        {
+
+        }
+
+        [Fact]
+        public void NotApplyInActiveDiscount()
+        {
+
+        }
+
+        [Fact]
         public void ApplyDiscountForMultibuy()
         {
-            ///Assess 
+            ///Arrange
+            
+
             ///Act
+            
+
             ///Asert
+        }
+
+        [Fact]
+        public void ApplyDiscountOnMultibuy()
+        {
+
         }
     }
 }
