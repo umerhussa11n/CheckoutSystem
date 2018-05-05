@@ -6,7 +6,7 @@ namespace CheckoutSystem.Service
 {
     public class DiscountService : IDiscountService
     {
-        public ShoppingBasket _basket;
+        private ShoppingBasket _basket;
 
         public DiscountService(ShoppingBasket shoppingBasket)
         {
