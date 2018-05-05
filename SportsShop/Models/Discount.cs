@@ -32,5 +32,12 @@ namespace CheckoutSystem.Models
 
         public Int64 Quantity { get; set; }
 
+        public enum Validator
+        {
+            NoDiscount,
+            NoBasket,
+            NoProducts,
+            DiscountApplied
+        }
     }
 }

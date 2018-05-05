@@ -39,9 +39,8 @@ namespace CheckoutSystem.Tests
             PopulateMockShoppingBasket();
         }
 
-
         [Fact]
-        public void ThrowExceptioIfDiscountValueIsZero()
+        public void ReturnEmptyBasketValueIfBasketIsEmpty()
         {
             var discount = new Discount()
             {
@@ -54,27 +53,33 @@ namespace CheckoutSystem.Tests
                 IsMultiBuy = true
             };
 
-            _mockDiscountService.Setup(x => x.ApplyDiscount())
-                                                .Throws<Exception>();
-
+            var discountService = new DiscountService(null);
+            Assert.Equal(Discount.Validator.NoBasket, discountService.ApplyDiscount());
         }
 
         [Fact]
-        public void NotApplyInActiveDiscount()
+        public void ReturnNoDiscountValueIfDiscountIsZero()
         {
             var discount = new Discount()
             {
                 Id = 1,
                 Code = "PINE3",
-                Price = new Price() { Amount = 10, Currency = "GBP", Symbol = "£" },
+                Price = new Price() { Amount = 0, Currency = "GBP", Symbol = "£" },
                 Description = "Three Pineaples Cost 130",
-                IsActive = false,
+                IsActive = true,
                 Quantity = 3,
                 IsMultiBuy = true
             };
-            var service = new DiscountService(_shoppingBasket);
-            bool isDiscountApplied = service.ApplyDiscount();
-            Assert.False(service.ApplyDiscount());
+
+            var shoppingBasket = new ShoppingBasket();
+            var discountService = new DiscountService(shoppingBasket);
+            Assert.Equal(Discount.Validator.NoDiscount, discountService.ApplyDiscount());
+        }
+
+        [Fact]
+        public void NotApplyInActiveDiscount()
+        {
+            
         }
 
         [Fact]

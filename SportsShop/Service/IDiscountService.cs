@@ -8,6 +8,6 @@ namespace CheckoutSystem.Service
 {
     public interface IDiscountService
     {
-        bool ApplyDiscount();
+        Discount.Validator ApplyDiscount();
     }
 }

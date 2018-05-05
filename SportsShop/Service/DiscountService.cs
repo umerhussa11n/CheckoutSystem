@@ -13,36 +13,43 @@ namespace CheckoutSystem.Service
            this._basket = shoppingBasket;
         }
 
-        public bool ApplyDiscount()
+        public Discount.Validator ApplyDiscount()
         {
             bool isDiscountApplied = false;
             bool isDiscountApplicable = false;
 
-            if (this._basket == null)
+            try
             {
-                throw new Exception("Error: No Basket found");
-            }
-
-            if (!this._basket.Products.Any())
-            {
-                throw new Exception("Error: No Discount Can be Applied as the basket is Empty");
-            }
-
-
-            foreach (var product in _basket.Products)
-            {
-                var activeDiscount = product.Discount.FirstOrDefault(x => x.IsActive == true);
-                if (activeDiscount != null)
+                if (this._basket == null)
                 {
-                    isDiscountApplicable = IsDiscountApplicable(product, activeDiscount);
-                    if (isDiscountApplicable)
+                    return Discount.Validator.NoBasket;
+                }
+
+                if (!this._basket.Products.Any())
+                {
+                    return Discount.Validator.NoProducts;
+                }
+
+
+                foreach (var product in _basket.Products)
+                {
+                    var activeDiscount = product.Discount.FirstOrDefault(x => x.IsActive == true);
+                    if (activeDiscount != null)
                     {
-                        ApplyProductDiscount(product, activeDiscount);
-                        isDiscountApplied = true;
+                        isDiscountApplicable = IsDiscountApplicable(product, activeDiscount);
+                        if (isDiscountApplicable)
+                        {
+                            ApplyProductDiscount(product, activeDiscount);
+                            isDiscountApplied = true;
+                        }
                     }
                 }
             }
-            return isDiscountApplied;
+            catch (Exception ex)
+            {
+                // log the exception, once log service is injected..
+            }
+            return isDiscountApplied ? Discount.Validator.DiscountApplied : Discount.Validator.NoDiscount;
         }
 
         private bool IsDiscountApplicable(Product product, Discount discount)
