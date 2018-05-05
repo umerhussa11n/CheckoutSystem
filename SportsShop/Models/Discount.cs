@@ -10,7 +10,7 @@ namespace CheckoutSystem.Models
         
         public Discount()
         {
-            _discountAmount = new Price();
+            _price = new Price();
         }
 
         public Int64 Id { get; set; }
@@ -19,13 +19,18 @@ namespace CheckoutSystem.Models
 
         public string Description { get; set; }
 
-        public bool IsValid { get; set; }
+        public bool IsActive { get; set; }
 
-        private Price _discountAmount;
-        public Price DiscountAmount
+        public bool IsMultiBuy { get; set; }
+
+        private Price _price;
+        public Price Price
         {
-            get { return _discountAmount; }
-            set { _discountAmount = value;  }
+            get { return _price; }
+            set { _price = value;  }
         }
+
+        public Int64 Quantity { get; set; }
+
     }
 }

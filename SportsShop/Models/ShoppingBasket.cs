@@ -10,13 +10,13 @@ namespace CheckoutSystem.Models
         public ShoppingBasket()
         {
             _products = new List<Product>();
-            _totalAmount = 0.0d;
+            _totalAmount = 0.0m;
         }
 
         public Int64 Id { get; set; }
 
         private List<Product> _products; 
-        public List<Product> Products
+        public virtual List<Product> Products
         {
             get { return _products; }
             set { _products = value; }
@@ -24,11 +24,28 @@ namespace CheckoutSystem.Models
 
         public int Quantity { get; set; }
 
-        private double _totalAmount; 
-        public double TotalAmount {
+        private decimal _totalAmount; 
+        public decimal TotalAmount {
             get
             {
                 return _totalAmount;
+            }
+            set
+            {
+                _totalAmount = value;
+            }
+        }
+
+        private decimal _totalDiscount; 
+        public decimal TotalDiscount
+        {
+            get
+            {
+                return _totalDiscount;
+            }
+            set
+            {
+                value = _totalDiscount;
             }
         }
     }

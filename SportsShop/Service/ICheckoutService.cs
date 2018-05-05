@@ -8,6 +8,6 @@ namespace CheckoutSystem.Service
     public interface ICheckoutService
     {
         void Scan(string item);
-        double GetTotalPrice();
+        decimal GetTotalPrice();
     }
 }

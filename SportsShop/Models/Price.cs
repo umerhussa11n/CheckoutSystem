@@ -15,7 +15,7 @@ namespace CheckoutSystem.Models
 
         public Int64 Id { get; set; }
 
-        public Double Amount { get; set; }
+        public decimal Amount { get; set; }
 
         public string Currency { get; set; }
 

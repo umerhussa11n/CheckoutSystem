@@ -12,8 +12,9 @@ namespace CheckoutSystem.Tests
     public class CheckoutServiceShould
     {
         List<Product> _allMockedProducts; 
-        Mock<InMemoryProductService> _mockInMemoryProductService;
-        Mock<DiscountService> _discountService;
+        Mock<IProductDataService> _mockInMemoryProductService;
+        Mock<IDiscountService> _discountService;
+        Mock<ShoppingBasket> _mockShoppingBasket;
         
 
         public List<Product> GetAllProducts()
@@ -28,8 +29,12 @@ namespace CheckoutSystem.Tests
 
         public CheckoutServiceShould()
         {
-            _mockInMemoryProductService = new Mock<InMemoryProductService>();
-            _discountService = new Mock<DiscountService>();
+            _mockShoppingBasket = new Mock<ShoppingBasket>();
+            //_mockInMemoryProductService = new Mock<InMemoryProductService>(_mockShoppingBasket.Object);
+            //
+            _mockInMemoryProductService = new Mock<IProductDataService>();
+
+            _discountService = new Mock<IDiscountService>();
             _allMockedProducts = GetAllProducts();
         }
 

@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace CheckoutSystem.Service
 {
+    /// <summary>
+    ///  this is one way we could get the products without the TDD Approach..
+    ///  this interface could have been passed before connecting to database and having methods 
+    ///  returning real products.... 
+    ///  this is just added for proof of concept and is not required while doing TDD now..
+    /// </summary>
     public class InMemoryProductService : IProductDataService
     {
         public virtual IEnumerable<Product> GetAllProducts()

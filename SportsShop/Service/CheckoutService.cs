@@ -33,9 +33,9 @@ namespace CheckoutSystem.Service
             }
         }
 
-        public double GetTotalPrice()
+        public decimal GetTotalPrice()
         {
-            double totalPrice = 0.0d;
+            decimal totalPrice = 0m;
             if (_basket != null)
             {
                 foreach (var product in Basket.Products)
@@ -44,7 +44,7 @@ namespace CheckoutSystem.Service
                 }
             }
 
-            //_discountService.ApplyDiscount(_basket, new Discount());
+            _discountService.ApplyDiscount();
 
             return totalPrice;
         }

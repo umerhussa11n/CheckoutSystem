@@ -40,5 +40,7 @@ namespace CheckoutSystem.Models
                 _discount = value;
             }
         }
+
+        public Int64 Quantity { get; set; }
     }
 }
