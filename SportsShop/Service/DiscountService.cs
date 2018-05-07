@@ -57,15 +57,13 @@ namespace CheckoutSystem.Service
             return (product.Quantity == discount.Quantity);
         }
 
-        private bool ApplyProductDiscount(Product product, Discount discount)
+        private void ApplyProductDiscount(Product product, Discount discount)
         {
             if (_basket.TotalAmount > 0)
             {
                 _basket.TotalAmount =  _basket.TotalAmount - discount.Price.Amount;
                 _basket.TotalDiscount += discount.Price.Amount;
             }
-
-            return false;
         }
     }
 }

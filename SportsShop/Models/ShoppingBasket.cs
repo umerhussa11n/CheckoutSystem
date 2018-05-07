@@ -24,7 +24,7 @@ namespace CheckoutSystem.Models
         public int Quantity { get; set; }
 
         private decimal _totalAmount =  0.0m;
-        public decimal TotalAmount {
+        public virtual decimal TotalAmount {
             get
             {
                 return _totalAmount;
@@ -35,8 +35,8 @@ namespace CheckoutSystem.Models
             }
         }
 
-        private decimal _totalDiscount; 
-        public decimal TotalDiscount
+        private Decimal _totalDiscount; 
+        public Decimal TotalDiscount
         {
             get
             {
@@ -44,7 +44,7 @@ namespace CheckoutSystem.Models
             }
             set
             {
-                value = _totalDiscount;
+                _totalDiscount = value;
             }
         }
     }
