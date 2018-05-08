@@ -14,7 +14,6 @@ namespace CheckoutSystem.Service
         {
             _productService = productService;
             _discountService = discountService;
-            //_basket = new ShoppingBasket();
         }
 
         private ShoppingBasket _basket;
