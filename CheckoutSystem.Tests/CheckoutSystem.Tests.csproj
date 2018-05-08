@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SportsShop\CheckoutSystem.csproj" />
+    <ProjectReference Include="..\CheckoutSystem\CheckoutSystem.csproj" />
   </ItemGroup>
 
 </Project>
