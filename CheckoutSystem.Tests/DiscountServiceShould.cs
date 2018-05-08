@@ -79,6 +79,27 @@ namespace CheckoutSystem.Tests
             return discounts;
         }
 
+        public virtual Product GetSingleProduct(decimal discountValue = 0.0m)
+        {
+            var product = new Product
+            {
+                Id = 1,
+                Name = "Apple",
+                Code = "A",
+                Quantity = 3,
+                Price = new Price { Amount = 0.50m, Currency = "GBP", Symbol = "£" }
+            };
+            var discount = new Discount();
+            if (discountValue != 0.0m)
+            {
+                discount.Price.Amount = discountValue;
+            }
+            product.Discount = new List<Discount>() { discount };
+
+            return product;
+        }
+
+
         public virtual decimal GetTotalAmount()
         {
             decimal total = 0.0m;
@@ -140,16 +161,19 @@ namespace CheckoutSystem.Tests
             var discount = new Discount()
             {
                 Id = 1,
-                Code = "PINE3",
+                Code = "A",
                 Price = new Price() { Amount = 0, Currency = "GBP", Symbol = "£" },
-                Description = "Three Pineaples Cost 130",
+                Description = "Three Quantity of Product A Cost £1.50",
                 IsActive = true,
                 Quantity = 3,
                 IsMultiBuy = true
             };
+            
+            var _mockShoppingBasketWithZeroDiscount = _mockShoppingBasket;
+            _mockShoppingBasketWithZeroDiscount.SetupGet(x => x.Products).Returns(new List<Product>() { GetSingleProduct(0.0m) });
 
-            var shoppingBasket = new ShoppingBasket();
-            var discountService = new DiscountService(shoppingBasket);
+            var discountService = new DiscountService(_mockShoppingBasketWithZeroDiscount.Object);
+
             Assert.Equal(Discount.Validator.NoDiscount, discountService.ApplyDiscount());
         }
 
@@ -166,8 +190,6 @@ namespace CheckoutSystem.Tests
                 Quantity = 3,
                 IsMultiBuy = true
             };
-
-
             var product = new Product()
             {
                 Id = 1,
@@ -177,6 +199,7 @@ namespace CheckoutSystem.Tests
                 Price = new Price { Amount = 10, Currency = "GBP", Symbol = "£" },
                 Quantity = 3
             };
+
             var shoppingBasket = new ShoppingBasket() { TotalAmount = 100, Products = new List<Product> { product } };
             var discountService = new DiscountService(shoppingBasket);
             var result = discountService.ApplyDiscount();
@@ -209,8 +232,9 @@ namespace CheckoutSystem.Tests
                 Quantity = 3
             };
 
-            var shoppingBasket = new ShoppingBasket() { TotalAmount = 1.50m, Products = new List<Product> { product } };
-            var discountService = new DiscountService(shoppingBasket);
+            _mockShoppingBasket.Object.TotalAmount = 1.50m;
+            _mockShoppingBasket.Object.Products =  new List<Product> { product };
+            var discountService = new DiscountService(_mockShoppingBasket.Object);
             var result = discountService.ApplyDiscount();
             var total = discountService._basket.TotalAmount;
             Assert.Equal(1.20m, total);
